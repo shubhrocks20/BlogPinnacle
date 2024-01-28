@@ -1,19 +1,20 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState} from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { LoginContext } from '../loginContext';
-import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
 
-  const { setIsLogin,setUser, user} = useContext(LoginContext);
+  const { setIsLogin,setUser} = useContext(LoginContext);
+
   const [form, setForm] = useState({
     email: '',
     password: '',
   });
   const navigate = useNavigate();
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -35,18 +36,15 @@ const Login = () => {
           },
         }
       );
-  
-      if (response.status === 200) {
         setIsLogin(true);
         setUser({
           _id: response.data.user._id.toString(),
           username: response.data.user.username.toString(),
         });
-  
         // Use toast notification instead of alert
         toast.success('Login successful!', {
           position: 'top-right',
-          autoClose: 3000, // 3 seconds
+          autoClose: 2000, // 2 seconds
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -58,35 +56,21 @@ const Login = () => {
         setTimeout(() => {
           navigate('/user');
         }, 2000);
-      } else {
-        // Handle other status codes if needed
-        toast.error('Login failed. Please try again.', {
-          position: 'top-right',
-          autoClose: 5000, // 5 seconds
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-      }
+      setForm({
+        email: '',
+        password: '',
+      });
     } catch (error) {
-      toast.error(`Error submitting form: ${error.message}`, {
+      toast.error(`Failed Signing In: ${error.response.data.message}`, {
         position: 'top-right',
-        autoClose: 5000, // 5 seconds
+        autoClose: 3000, // 1 seconds
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
       });
-  
-      setForm({
-        email: '',
-        password: '',
-      });
     }
-
   };
   
   return (

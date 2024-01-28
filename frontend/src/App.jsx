@@ -7,14 +7,14 @@ import Footer from "./components/Footer";
 const App = () => {
   const [isLogin, setIsLogin] = useState(false);
   const [user, setUser] = useState({});
-  
+
   return (
     <>
-        <LoginContext.Provider value={{isLogin, setIsLogin, user, setUser}}>
+      <LoginContext.Provider value={{ isLogin, setIsLogin, user, setUser }}>
         <Header />
         <Outlet />
         <Footer />
-        </LoginContext.Provider>
+      </LoginContext.Provider>
     </>
   );
 };

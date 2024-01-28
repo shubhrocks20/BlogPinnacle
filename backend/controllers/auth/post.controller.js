@@ -1,6 +1,7 @@
 import mongoose from 'mongoose'
 import { Record } from '../../models';
 import {Post} from '../../models';
+import CustomErrorHandler from '../../services/CustomErrorHandler';
 const postController = {
     async posts(req, res, next){
         try{
@@ -8,15 +9,14 @@ const postController = {
             const {recordId, title, content} = req.body;
     
             if(!mongoose.Types.ObjectId.isValid(recordId)){
-                return res.status(400).json({ error: 'Invalid Record ObjectId' })
+                return next(CustomErrorHandler.wrongCredentials('ObjectId is not Appropiate'))
             }
             //check if recordId exist in Record
             const isRecord = await Record.findById(recordId);
             if(!isRecord){
-                return res.status(400).json({error: 'Record not found'})
+                return next(CustomErrorHandler.notFound())
             }
             //Create new post
-    
             const newPost = new Post({
                 record: recordId,
                 title, content
@@ -24,11 +24,10 @@ const postController = {
 
             await newPost.save();
 
-            res.status(200).json({message: 'Post created successfully'})
+            res.json({message: 'Post created successfully'})
         }
         catch (error) {
-            console.error(error);
-            return res.status(500).json({ error: 'Internal Server Error' });
+            return next(error);
           } 
     }
 }

@@ -105,7 +105,7 @@ const MyBlogs = () => {
           <>
           <div className="p-16 mx-auto text-center flex flex-col items-center">
             <h1 className="text-center text-5xl mb-10 font-semibold">No Blogs </h1>
-            <img src="public\images\dustbin.jpeg" alt="" className="w-1/2 rounded-lg shadow-lg"/>
+            <img src="\images\dustbin.jpeg" alt="" className="w-1/2 rounded-lg shadow-lg"/>
             <Link to="/user">
             <button className="rounded-md px-8 py-2 text-md bg-gray-700 text-white hover:bg-gray-900 my-6">Create New Blog</button>
             </Link>

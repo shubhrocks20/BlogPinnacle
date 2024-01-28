@@ -1,7 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
-
 import {createBrowserRouter, createRoutesFromElements, Route, RouterProvider} from 'react-router-dom'
 import Home from './components/Home.jsx'
 import Register from './components/Register.jsx'
@@ -13,8 +12,11 @@ import EditBlog from './components/EditBlog.jsx'
 import SingleBlogPage from './components/SingleBlogPage.jsx'
 
 
+
 const router = createBrowserRouter(
   createRoutesFromElements(
+    
+    
     <Route path='/' element={<App />}>
       {/* <Route path='/' element></Route> */}
       <Route path='' element={<Home />}></Route>
@@ -26,9 +28,15 @@ const router = createBrowserRouter(
       <Route path='edit' element={<EditBlog />}></Route>
       <Route path='singleblog' element={<SingleBlogPage />}></Route>
     </Route>
+    
   )
 )
 
 ReactDOM.createRoot(document.getElementById('root')).render(
+  <>
+  
   <RouterProvider router={router} />
+ 
+  </>
+  
 )

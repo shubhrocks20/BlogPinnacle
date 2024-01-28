@@ -1,17 +1,28 @@
 import mongoose from 'mongoose';
 import { Post } from '../../models';
+import CustomErrorHandler from '../../services/CustomErrorHandler';
 const getPostController = {
     async getPost(req, res, next){
 
         try{
             const posts = await Post.find().select(' -updatedAt -_id -__v -record');
-            res.status(200).json(posts);
+            if(!posts){
+                return next(CustomErrorHandler.notFound('No Posts Found!'))
+            }
+            res.json(posts);
         }
         catch(err){
-            console.log('Error While Fetching Posts!', err);
-            res.status(500).json({msg: 'Internal Server Error!'});
+            return next(err);
         }
-
+    },
+    async getLatestBlogs(req, res, next){
+        try{
+            const posts = await Post.find().sort({ createdAt: -1 }).limit(3)
+            res.json(posts);
+        }
+        catch(error){
+            return next(error);
+        }
     }
 }
 

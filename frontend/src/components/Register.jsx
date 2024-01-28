@@ -22,8 +22,9 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    let response;
     try {
-      const response = await axios.post(
+       response = await axios.post(
         'http://localhost:5000/register',
         JSON.stringify(form),
         {
@@ -57,7 +58,7 @@ const Register = () => {
       }, 2000);
     } catch (error) {
       // Handle registration failure
-      toast.error(`Registration failed. ${error.message}`, {
+      toast.error(`Registration failed. ${error.response.data.message}`, {
         position: 'top-right',
         autoClose: 5000, // 5 seconds
         hideProgressBar: false,

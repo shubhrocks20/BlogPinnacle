@@ -9,6 +9,7 @@ router.post('/login', loginController.login);
 router.post('/register', registerController.register);
 router.post('/post', postController.posts);
 router.get('/posts', getPostController.getPost);
+router.get('/latest/posts', getPostController.getLatestBlogs);
 router.get('/blogs/:id', blogsController.getBlogs);
 router.patch('/blog/:id', updateController.update);
 router.delete('/delete/:id', deleteController.deletePost);

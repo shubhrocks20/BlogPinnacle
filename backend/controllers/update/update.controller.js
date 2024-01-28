@@ -1,4 +1,5 @@
 import { Post } from "../../models";
+import CustomErrorHandler from "../../services/CustomErrorHandler";
 const updateController = {
   async update(req, res, next) {
     const itemId = req.params.id;
@@ -14,14 +15,14 @@ const updateController = {
 
       // Check if the item was found and updated
       if (!updatedItem) {
-        return res.status(404).json({ error: "Item not found" });
+        return next(CustomErrorHandler.notFound())
       }
 
       // Respond with the updated item
       res.json(updatedItem);
     } catch (error) {
       // Handle any errors that occurred during the update
-      res.status(500).json({ error: "Internal Server Error" });
+      return next(error);
     }
   },
 };

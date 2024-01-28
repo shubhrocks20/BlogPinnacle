@@ -1,6 +1,19 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 const Home = () => {
+  const [blogs, setBlogs] = useState([]);
+  const navigate = useNavigate();
+  const handleView = (index) => {
+    const singleblog = blogs[index];
+    navigate("/singleblog", { state: { singleblog } });
+  };
+
+  useEffect(()=>{
+    axios.get('http://localhost:5000/latest/posts')
+    .then((res)=>res.data)
+    .then((res)=>setBlogs(res))
+  }, [])
   return (
     <>
       <section class="hero  px-10 py-14 min-h-screen">
@@ -47,23 +60,36 @@ const Home = () => {
           </h1>
 
           <div className="latest-blogs flex justify-around w-full">
-           {/* Card 1 */}
-           <div className="card bg-white p-8 rounded-lg shadow-md flex-1 mx-2">
-            <h2 className="text-2xl font-bold mb-4">The Rise of Quantum Computing</h2>
-            <p className="text-gray-800 text-lg">As quantum computing becomes more accessible, it opens up new possibilities for solving complex problems in seconds that would take traditional computers years to process. Explore the exciting advancements in the field of quantum computing and its potential impact on the IT industry.</p>
+            {
+              blogs.map((blog, index)=>(
+                <div className="card bg-white p-4 rounded-lg shadow-md flex-1 mx-2" key={index}>
+            <h2 className="text-2xl font-bold mb-4 ">{blog.title}</h2>
+            <p className="text-gray-800 text-lg h-28 overflow-hidden mb-2">{blog.content}</p>
+            <button
+                className="inline-flex items-center font-medium hover:underline"
+                onClick={() => {
+                  handleView(index);
+                }}
+              >
+                Read more
+                <svg
+                  className="ml-2 w-4 h-4"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                    clipRule="evenodd" 
+                  ></path>
+                </svg>
+              </button>
+            
           </div>
 
-          {/* Card 2 */}
-          <div className="card bg-white p-8 rounded-lg shadow-md flex-1 mx-2">
-            <h2 className="text-2xl font-bold mb-4">AI in Healthcare: Transforming Patient Care</h2>
-            <p className="text-gray-800 text-lg">Artificial Intelligence is making significant strides in the healthcare sector. From personalized treatment plans to predictive analytics, AI is revolutionizing patient care. Discover how innovative AI applications are reshaping the landscape of healthcare technology.</p>
-          </div>
-
-          {/* Card 3 */}
-          <div className="card bg-white p-8 rounded-lg shadow-md flex-1 mx-2">
-            <h2 className="text-2xl font-bold mb-4">Ethical Considerations in AI Development</h2>
-            <p className="text-gray-800 text-lg">As AI technologies advance, the importance of ethical considerations becomes paramount. Explore the ethical dilemmas and challenges that arise in AI development and how the industry is addressing them to ensure responsible and fair use of AI in the human world.</p>
-          </div>
+              ))
+            }
         </div>
 
         </div>

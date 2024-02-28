@@ -1,12 +1,12 @@
-import React, { useContext, useState } from "react";
-import { LoginContext } from "../loginContext";
+import React, {  useState } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const User = () => {
-  const { user } = useContext(LoginContext);
+  const { user } = useSelector((state) => state.reducer.login);
   const navigate = useNavigate();
   const [form, setForm] = useState({
     recordId: user._id,

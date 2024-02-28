@@ -2,19 +2,16 @@ import React, { useContext, useEffect, useState } from "react";
 import { LoginContext } from "../loginContext";
 import {Link, useNavigate} from 'react-router-dom'
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 const MyBlogs = () => {
-
-  
-  const { user } = useContext(LoginContext);
+  const { user } = useSelector((state) => state.reducer.login);
   const [blogs, setBlogs] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     axios.get(`http://localhost:5000/blogs/${user._id}`)
       .then((res) => setBlogs(res.data));
-    
-
   }, [blogs]);
 
   const handleDelete =  async(index)=>{

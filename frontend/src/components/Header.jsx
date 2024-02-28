@@ -1,16 +1,20 @@
 import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { LoginContext } from "../loginContext";
+import { clearUser } from "../store/loginSlice";
+
+import { useDispatch, useSelector } from "react-redux";
 
 const Header = () => {
+  const dispatch = useDispatch()
   const navigate = useNavigate();
-  const { isLogin, setIsLogin, setUser } = useContext(LoginContext);
-  const handleClick = (e) => {
-    setIsLogin(false);
-    setUser({
-      _id: '',
-      username: ''
-    })
+  const { user } = useSelector((state) => state.reducer.login);
+  
+  
+  const handleClick = () => {
+    // Dispatch action to clear user state
+    localStorage.removeItem("persist:root")
+    dispatch(clearUser());
+    // Redirect to login page
     navigate("/login");
   };
   return (
@@ -33,7 +37,7 @@ const Header = () => {
             <li className="list-none cursor-pointer hover:underline">
               <Link to="/Blogs">Blogs</Link>
             </li>
-            {!isLogin ? (
+            {!user ? (
               <>
             <li className="list-none cursor-pointer hover:underline">
               <Link to='/login'>Login</Link>
@@ -53,7 +57,7 @@ const Header = () => {
           </div>
         </div>
         <div className="right">
-          {!isLogin ? (
+          {!user ? (
           <button className="rounded-md px-8 py-2 text-md bg-gray-700 text-white hover:bg-gray-900">
             <Link to="/register">
             Sign Up

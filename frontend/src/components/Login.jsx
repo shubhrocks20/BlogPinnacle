@@ -2,13 +2,16 @@ import React, { useContext, useState} from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { LoginContext } from '../loginContext';
+import { Link } from 'react-router-dom';
+import {useDispatch} from 'react-redux'
+import { addUser } from '../store/loginSlice';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
 
-  const { setIsLogin,setUser} = useContext(LoginContext);
-
+  const { setIsLogin,setUser, user} = useContext(LoginContext);
+  const dispatch = useDispatch();
   const [form, setForm] = useState({
     email: '',
     password: '',
@@ -27,6 +30,7 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
+      console.log(form)
       const response = await axios.post(
         'http://localhost:5000/login',
         JSON.stringify(form),
@@ -36,11 +40,11 @@ const Login = () => {
           },
         }
       );
-        setIsLogin(true);
-        setUser({
-          _id: response.data.user._id.toString(),
-          username: response.data.user.username.toString(),
-        });
+      
+      if (response.status === 200) {
+        console.log(response)
+        dispatch(addUser(response.data.user));
+  
         // Use toast notification instead of alert
         toast.success('Login successful!', {
           position: 'top-right',

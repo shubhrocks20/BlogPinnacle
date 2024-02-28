@@ -24,7 +24,7 @@ BlogPinnacle is a full-stack blogging website built using the MERN (MongoDB, Exp
 ## Installation
 
 1. **Clone the repository:**
-git clone [https://github.com/yourusername/blogpinnacle.git](https://github.com/shubhrocks20/blogpinnacle)
+git clone [[https://github.com/shubhrocks20/blogpinnacle](https://github.com/shubhrocks20/blogpinnacle)]
 
 2. **Navigate to the project directory:**
 

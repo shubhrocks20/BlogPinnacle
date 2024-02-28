@@ -64,7 +64,7 @@ const Login = () => {
         email: '',
         password: '',
       });
-    } catch (error) {
+    }} catch (error) {
       toast.error(`Failed Signing In: ${error.response.data.message}`, {
         position: 'top-right',
         autoClose: 3000, // 1 seconds

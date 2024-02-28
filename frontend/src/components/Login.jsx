@@ -1,8 +1,6 @@
-import React, { useContext, useState} from 'react';
+import React, {  useState} from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { LoginContext } from '../loginContext';
-import { Link } from 'react-router-dom';
 import {useDispatch} from 'react-redux'
 import { addUser } from '../store/loginSlice';
 import { ToastContainer, toast } from 'react-toastify';
@@ -10,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
 
-  const { setIsLogin,setUser, user} = useContext(LoginContext);
+  
   const dispatch = useDispatch();
   const [form, setForm] = useState({
     email: '',

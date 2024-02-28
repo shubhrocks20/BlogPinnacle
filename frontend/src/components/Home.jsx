@@ -1,7 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 const Home = () => {
+  const { user } = useSelector((state) => state.reducer.login);
   const [blogs, setBlogs] = useState([]);
   const navigate = useNavigate();
   const handleView = (index) => {
@@ -29,7 +31,7 @@ const Home = () => {
             templates and designs. Crafted to help you tell your story.
           </p>
 
-          <Link to="/register">
+          <Link to={user ? '/user' : '/login'}>
             <button
               href="#_"
               class="inline-flex items-center justify-center w-full px-6 py-3 mb-2 text-lg text-white bg-green-400 rounded-2xl sm:w-auto sm:mb-0"

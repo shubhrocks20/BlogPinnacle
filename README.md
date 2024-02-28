@@ -2,6 +2,15 @@
 
 BlogPinnacle is a full-stack blogging website built using the MERN (MongoDB, Express, React, Node.js) stack. It allows users to register, login, create, update, and delete their own blogs. The website implements JWT authentication for secure user authentication and password encryption for enhanced security.
 
+## Screenshots
+![Home](https://github.com/shubhrocks20/BlogPinnacle/assets/94545975/f7bc7b68-9774-4c6e-b727-8cfca35cf98e)
+![Register](https://github.com/shubhrocks20/BlogPinnacle/assets/94545975/ab01f3d1-0a2e-4f2c-8c41-10c782083d26)
+![Login](https://github.com/shubhrocks20/BlogPinnacle/assets/94545975/90b1866f-fa32-466c-81db-416fb7b730f5)
+![User](https://github.com/shubhrocks20/BlogPinnacle/assets/94545975/d56af12e-0194-4362-bd9f-03a25798722f)
+![My blogs](https://github.com/shubhrocks20/BlogPinnacle/assets/94545975/2c728ab2-0350-4e0d-9444-0a0c79eb3567)
+![All blogs](https://github.com/shubhrocks20/BlogPinnacle/assets/94545975/550065ce-a2cb-4f55-b6f9-c54f36602a6f)
+
+
 ## Features
 
 - **User Registration:** Users can create an account by providing necessary details.
@@ -71,7 +80,9 @@ Special thanks to [Name], [Name], and [Name] for their contributions and support
 
 ## Contact
 
-If you have any questions or suggestions, feel free to contact us at [email@example.com].
+If you have any questions or suggestions, feel free to contact us at [shubhamkumar2056@gmail.com].
+
+
 
 
 

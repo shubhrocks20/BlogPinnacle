@@ -18,7 +18,10 @@ const MyBlogs = () => {
       .then((res) => {
         setBlogs(res.data);
         setLoading(false); // Set loading state to false when blogs data is fetched
-      });
+      })
+      .catch((err)=>{
+        setLoading(false);
+      })
 
     axios
       .get(`http://localhost:5000/likedPost/${user._id}`)

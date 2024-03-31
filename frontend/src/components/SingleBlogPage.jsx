@@ -12,6 +12,7 @@ import {
 } from "react-icons/fa";
 import axios from "axios";
 import SpinnerLoader from "../utils/SpinnerLoader"; // Import SpinnerLoaded component
+import { ToastContainer, toast } from "react-toastify";
 
 const SingleBlogPage = () => {
   const location = useLocation();
@@ -100,6 +101,22 @@ const SingleBlogPage = () => {
   };
 
   const handleLike = async () => {
+    if (!user) {
+      // Display toast if user is not logged in
+      toast.error(`Please Login to Like.`, {
+        position: 'top-right',
+        autoClose: 2000, // 5 seconds
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      setTimeout(() => {
+        navigate('/login');
+      }, 2000);
+      return;
+    }
     if (!isLiked(id) && user) {
       // Like the post
       try {
@@ -186,6 +203,7 @@ const SingleBlogPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-100 to-blue-200 pt-10 pb-20 px-4">
+      <ToastContainer />
       <div className="container mx-auto max-w-4xl">
         {loading ? ( // Conditional rendering of SpinnerLoaded component while loading
           <SpinnerLoader />

@@ -30,10 +30,7 @@ const EditBlogWrapper = () => {
   return user ? <EditBlog /> : <Navigate to="/login" />;
 };
 
-const SingleBlogPageWrapper = () => {
-  const { user } = useSelector((state) => state.reducer.login);
-  return user ? <SingleBlogPage /> : <Navigate to="/login" />;
-};
+
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -45,7 +42,7 @@ const router = createBrowserRouter(
       <Route path='blogs' element={<Blogs /> }></Route>
       <Route path='myblogs' element={<MyBlogsWrapper />}></Route>
       <Route path='edit' element={<EditBlogWrapper />}></Route>
-      <Route path='singleblog' element={<SingleBlogPageWrapper />}></Route>
+      <Route path='singleblog' element={<SingleBlogPage />}></Route>
     </Route>
   )
 )

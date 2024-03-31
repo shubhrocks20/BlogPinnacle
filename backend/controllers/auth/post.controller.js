@@ -20,9 +20,13 @@ const postController = {
             }
 
             // Upload the image on Cloudinary
-            let imageLocalPath;
+            let imageUrl;
             if (req.files && req.files.image) {
-                imageLocalPath = await uploadOnCloudinary(req.files.image[0].path);
+                const imageFile = req.files.image[0];
+                const cloudinaryResponse = await uploadOnCloudinary(imageFile.buffer);
+                 // Upload image to Cloudinary
+                //  console.log(cloudinaryResponse)
+                imageUrl = cloudinaryResponse; // Get image URL
             }
 
             // Create a new post
@@ -30,7 +34,7 @@ const postController = {
                 authorId,
                 title,
                 content,
-                image: imageLocalPath ? imageLocalPath.url : null // Set image URL if uploaded
+                image: imageUrl // Set image URL if uploaded
             });
 
             await newPost.save();
@@ -40,6 +44,7 @@ const postController = {
             return next(error);
         }
     },
+
 
     async addLike(req, res, next) {
         try {

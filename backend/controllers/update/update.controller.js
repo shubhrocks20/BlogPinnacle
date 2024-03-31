@@ -6,42 +6,40 @@ const updateController = {
     try {
       const postId = req.params.id;
       const { title, content } = req.body;
+  
       // Check if the post exists
       const existingPost = await Post.findById(postId);
       if (!existingPost) {
         return next(CustomErrorHandler.notFound("Post not found"));
       }
-
-      // Check if a new image is sent
-      let updatedImageData = {};
+  
+      // Handle image update
+      let imageUrl;
       if (req.files && req.files.image) {
         // Upload the new image on Cloudinary
-        const imageLocalPath = await uploadOnCloudinary(
-          req.files.image[0].path
-        );
-        updatedImageData.image = imageLocalPath.url;
+        const imageLocalPath = await uploadOnCloudinary(req.files.image[0].path);
+        imageUrl = imageLocalPath;
       }
-
-      // Update only the fields that are present in req.body
+  
+      // Update the post data
       const updatedPostData = {
         ...(title && { title }),
         ...(content && { content }),
-        ...(Object.keys(updatedImageData).length && {
-          image: updatedImageData.image,
-        }),
+        ...(imageUrl && { image: imageUrl }), // Update image only if new image is uploaded
       };
-
+  
       // Update the post
-      const updatedPost = await Post.findByIdAndUpdate(
-        postId,
-        updatedPostData,
-        { new: true }
-      );
-
+      const updatedPost = await Post.findByIdAndUpdate(postId, updatedPostData, { new: true });
+  
+      if (!updatedPost) {
+        return next(CustomErrorHandler.notFound("Failed to update post"));
+      }
+  
       res.json({ message: "Post updated successfully", post: updatedPost });
     } catch (error) {
       return next(error);
     }
-  },
+  }
+  
 };
 export default updateController;

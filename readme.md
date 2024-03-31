@@ -2,6 +2,22 @@
 
 BlogPinnacle is a web application for creating and managing blog posts. It allows users to read and comment on blog posts, as well as like and unlike them. The application is built using React.js for the frontend and Node.js with Express.js for the backend.
 
+## ScreenShots
+- Home Page
+  ![Screenshot 2024-03-31 185719](https://github.com/shubhrocks20/BlogPinnacle/assets/94545975/e6e25606-ed5f-499a-8995-ca550206daba)
+- Login Page
+  ![Screenshot 2024-03-31 185738](https://github.com/shubhrocks20/BlogPinnacle/assets/94545975/432d0895-f05c-48f3-8204-9dfffe54f4a0)
+- Register Page
+  ![Screenshot 2024-03-31 185756](https://github.com/shubhrocks20/BlogPinnacle/assets/94545975/8cc5abc3-5188-480c-bdcd-c93b6d5f3061)
+- Blogs Page
+  ![Screenshot 2024-03-31 185818](https://github.com/shubhrocks20/BlogPinnacle/assets/94545975/32c30f4a-e4a7-49f9-8ddb-40f7a6e7ff41)
+- User Blog Page
+  ![Screenshot 2024-03-31 185945](https://github.com/shubhrocks20/BlogPinnacle/assets/94545975/f299740a-5ee8-4b31-8191-cbace9565638)
+- Post Creation
+  ![Screenshot 2024-03-31 185932](https://github.com/shubhrocks20/BlogPinnacle/assets/94545975/266da535-56cd-4239-adc5-b14c539c467a)
+- Single Blog View With Comments
+  ![Screenshot 2024-03-31 190025](https://github.com/shubhrocks20/BlogPinnacle/assets/94545975/be680f67-d317-4263-9269-ca5f19dc5e56)
+
 ## Features 🌟
 
 - 📚 View blog posts: Users can browse through a collection of blog posts, accessing content easily.
@@ -54,8 +70,8 @@ To get started with BlogPinnacle, follow these steps:
 3. **Install dependencies for both the frontend and backend:**
 
    ```bash
-   cd client && npm install
-   cd ../server && npm install
+   cd frontend && npm install
+   cd ../backend && npm install
    ```
 
 4. **Set up your MongoDB database:**
@@ -69,18 +85,18 @@ To get started with BlogPinnacle, follow these steps:
 6. **Run the backend server:**
 
    ```bash
-   npm start
+   npm run dev
    ```
 
 7. **Run the frontend application:**
 
    ```bash
-   cd ../client && npm start
+   cd ../frontend && npm run dev
    ```
 
 8. **Access the application:**
 
-   Open your web browser and go to `http://localhost:3000`.
+   Open your web browser and go to `http://localhost:5000`.
 
 ## Contributing 🤝
 

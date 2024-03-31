@@ -28,13 +28,13 @@ const Blogs = () => {
   };
 
   useEffect(() => {
-    axios.get("http://localhost:5000/blogs").then((res) => {
+    axios.get("https://doubtful-waders-ray.cyclic.app/blogs").then((res) => {
       setBlogs(res.data);
      
       setLoading(false); // Set loading state to false when blogs data is fetched
     });
     if (user) {
-      axios.get(`http://localhost:5000/likedPost/${user._id}`).then((res) => setLikedBlogs(res.data));
+      axios.get(`https://doubtful-waders-ray.cyclic.app/likedPost/${user._id}`).then((res) => setLikedBlogs(res.data));
     }
   }, [user]);
 
@@ -51,24 +51,24 @@ const Blogs = () => {
       if (!isLiked(blog._id)) {
         try {
           const res = await axios.post(
-            `http://localhost:5000/addLike`,
+            `https://doubtful-waders-ray.cyclic.app/addLike`,
             JSON.stringify({ postId: blog._id, userId: user._id }),
             { headers: { "Content-Type": "application/json" } }
           );
-          axios.get(`http://localhost:5000/likedPost/${user._id}`).then((res) => setLikedBlogs(res.data));
-          axios.get(`http://localhost:5000/blogs`).then((res) => setBlogs(res.data));
+          axios.get(`https://doubtful-waders-ray.cyclic.app/likedPost/${user._id}`).then((res) => setLikedBlogs(res.data));
+          axios.get(`https://doubtful-waders-ray.cyclic.app/blogs`).then((res) => setBlogs(res.data));
         } catch (error) {
           console.log("Error liking post:", error);
         }
       } else {
         try {
           const res = await axios.post(
-            `http://localhost:5000/blog/unlike`,
+            `https://doubtful-waders-ray.cyclic.app/blog/unlike`,
             JSON.stringify({ postId: blog._id, userId: user._id }),
             { headers: { "Content-Type": "application/json" } }
           );
-          axios.get(`http://localhost:5000/likedPost/${user._id}`).then((res) => setLikedBlogs(res.data));
-          axios.get(`http://localhost:5000/blogs/`).then((res) => setBlogs(res.data));
+          axios.get(`https://doubtful-waders-ray.cyclic.app/likedPost/${user._id}`).then((res) => setLikedBlogs(res.data));
+          axios.get(`https://doubtful-waders-ray.cyclic.app/blogs/`).then((res) => setBlogs(res.data));
         } catch (error) {
           console.log("Error unliking post:", error);
         }

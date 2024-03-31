@@ -17,7 +17,7 @@ const Home = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/latest/blogs")
+      .get("https://doubtful-waders-ray.cyclic.app/latest/blogs")
       .then((res) => res.data)
       .then((res) => {
         setBlogs(res);

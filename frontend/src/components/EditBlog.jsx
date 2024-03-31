@@ -57,7 +57,7 @@ const EditBlog = () => {
       });
 
       const updating = await axios.patch(
-        `http://localhost:5000/blog/${localstate._id}`,
+        `https://doubtful-waders-ray.cyclic.app/blog/${localstate._id}`,
         formDataToSend,
         {
           headers: {

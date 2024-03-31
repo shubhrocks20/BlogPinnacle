@@ -25,7 +25,7 @@ const Register = () => {
     let response;
     try {
        response = await axios.post(
-        'http://localhost:5000/register',
+        'https://doubtful-waders-ray.cyclic.app/register',
         JSON.stringify(form),
         {
           headers: {

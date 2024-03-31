@@ -30,7 +30,7 @@ const Login = () => {
     try {
       console.log(form)
       const response = await axios.post(
-        'http://localhost:5000/login',
+        'https://doubtful-waders-ray.cyclic.app/login',
         JSON.stringify(form),
         {
           headers: {

@@ -22,7 +22,7 @@ const User = () => {
       Object.keys(form).forEach((key) => {
         formData.append(key, form[key]);
       });
-      const response = await axios.post('http://localhost:5000/post', formData, {
+      const response = await axios.post('https://doubtful-waders-ray.cyclic.app/post', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
       toast.success('Post Submitted Successfully!', {

@@ -2,8 +2,7 @@
 
 BlogPinnacle is a web application for creating and managing blog posts. It allows users to read and comment on blog posts, as well as like and unlike them. The application is built using React.js for the frontend and Node.js with Express.js for the backend.
 
-## Live 
-[Live]([URL](https://brilliant-phoenix-ee606e.netlify.app/))
+[Live 🔗](https://brilliant-phoenix-ee606e.netlify.app/){:target="_blank"}
 
 ## ScreenShots
 - Home Page

@@ -4,6 +4,7 @@ import App from './App.jsx'
 import { Provider, useSelector } from 'react-redux'
 import { store, persistor } from './store/store.js'
 import { PersistGate } from 'redux-persist/integration/react'
+import './index.css'
 
 import {createBrowserRouter, createRoutesFromElements, Route, RouterProvider, Navigate} from 'react-router-dom'
 import Home from './components/Home.jsx'

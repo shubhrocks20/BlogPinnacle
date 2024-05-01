@@ -32,10 +32,12 @@ const SingleBlogPage = () => {
   const [loading, setLoading] = useState(true); // State variable to track loading state
 
   useEffect(() => {
-    axios.get(`https://doubtful-waders-ray.cyclic.app/blog/${id}`).then((res) => {
-      setBlog(res.data.post);
-      setLoading(false); // Set loading state to false when blog data is fetched
-    });
+    axios
+      .get(`https://doubtful-waders-ray.cyclic.app/blog/${id}`)
+      .then((res) => {
+        setBlog(res.data.post);
+        setLoading(false); // Set loading state to false when blog data is fetched
+      });
 
     if (user) {
       axios
@@ -84,9 +86,11 @@ const SingleBlogPage = () => {
         (comment) => comment._id !== commentId
       );
       setComments(updatedComments);
-      axios.get(`https://doubtful-waders-ray.cyclic.app/blog/${id}`).then((res) => {
-        setBlog(res.data.post);
-      });
+      axios
+        .get(`https://doubtful-waders-ray.cyclic.app/blog/${id}`)
+        .then((res) => {
+          setBlog(res.data.post);
+        });
     } catch (error) {
       console.log("Error:", error);
     }
@@ -104,7 +108,7 @@ const SingleBlogPage = () => {
     if (!user) {
       // Display toast if user is not logged in
       toast.error(`Please Login to Like.`, {
-        position: 'top-right',
+        position: "top-right",
         autoClose: 2000, // 5 seconds
         hideProgressBar: false,
         closeOnClick: true,
@@ -113,7 +117,7 @@ const SingleBlogPage = () => {
         progress: undefined,
       });
       setTimeout(() => {
-        navigate('/login');
+        navigate("/login");
       }, 2000);
       return;
     }
@@ -202,10 +206,10 @@ const SingleBlogPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-100 to-blue-200 pt-10 pb-20 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-green-100 to-blue-200 pt-10 pb-20 px-2 sm:px-4 lg:px-8 scroll-smooth">
       <ToastContainer />
       <div className="container mx-auto max-w-4xl">
-        {loading ? ( // Conditional rendering of SpinnerLoaded component while loading
+        {loading ? (
           <SpinnerLoader />
         ) : (
           <>
@@ -217,19 +221,17 @@ const SingleBlogPage = () => {
               Go Back
             </button>
             <div className="bg-white rounded-lg shadow-xl overflow-hidden">
-              {blog.image ? (
+              {blog.image && (
                 <div className="flex justify-center">
                   <img
                     alt="Blog"
-                    className="w-full max-h-96 object-cover"
+                    className="md:w-full h-auto object-cover"
                     src={blog.image}
                   />
                 </div>
-              ) : (
-                <></>
               )}
-              <div className="p-6">
-                <h1 className="text-center text-4xl lg:text-5xl font-bold text-gray-800 mb-4">
+              <div className="p-4 sm:p-6">
+                <h1 className="text-center text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-4">
                   {blog.title}
                 </h1>
                 <div className="flex items-center justify-center mb-6">
@@ -238,10 +240,12 @@ const SingleBlogPage = () => {
                     {blog.author}
                   </span>
                 </div>
-                <p className="text-gray-600 text-lg lg:text-xl leading-relaxed mb-6">
-                  {blog.content}
-                </p>
-                <div className="flex items-center  mb-2">
+                <div className="max-h-60 md:max-h-fit overflow-y-scroll md:overflow-y-hidden mb-4">
+                  <p className="text-gray-600 text-sm sm:text-base lg:text-lg leading-relaxed mb-6">
+                    {blog.content}
+                  </p>
+                </div>
+                <div className="flex items-center mb-2">
                   <button
                     className="flex items-center mr-4"
                     onClick={() => handleLike()}
@@ -259,7 +263,11 @@ const SingleBlogPage = () => {
                     className="flex items-center"
                     onClick={toggleComments}
                   >
-                    <FaCommentDots className="text-gray-700 hover:text-blue-600 transition-colors" />
+                    <FaCommentDots
+                      className={`text-gray-700 ${
+                        showComments ? "hover:text-blue-600" : ""
+                      } transition-colors`}
+                    />
                     <span className="ml-1">{blog.comments || 0}</span>
                   </button>
                 </div>

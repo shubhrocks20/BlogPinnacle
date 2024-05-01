@@ -19,9 +19,9 @@ const MyBlogs = () => {
         setBlogs(res.data);
         setLoading(false); // Set loading state to false when blogs data is fetched
       })
-      .catch((err)=>{
+      .catch((err) => {
         setLoading(false);
-      })
+      });
 
     axios
       .get(`https://doubtful-waders-ray.cyclic.app/likedPost/${user._id}`)
@@ -118,10 +118,10 @@ const MyBlogs = () => {
           {blogs.length ? (
             <div className="container mx-auto px-4">
               <div className="text-center mb-12">
-                <h1 className="text-5xl font-bold text-gray-800 mb-4">
+                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-4">
                   Your Blogs
                 </h1>
-                <p className="text-xl text-gray-600">
+                <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600">
                   A collection of your thoughts and stories.
                 </p>
               </div>
@@ -136,14 +136,14 @@ const MyBlogs = () => {
                       className="w-full h-56 object-cover"
                       src={blog.image || "https://via.placeholder.com/500"}
                     />
-                    <div className="p-6">
+                    <div className="p-4 sm:p-6">
                       <h2
-                        className="font-bold text-xl mb-2 text-gray-800 hover:text-blue-600 transition-colors cursor-pointer"
+                        className="font-bold text-lg sm:text-xl md:text-2xl mb-2 text-gray-800 hover:text-blue-600 transition-colors cursor-pointer"
                         onClick={() => handleView(index)}
                       >
                         {blog.title}
                       </h2>
-                      <p className="text-gray-700 mb-4">
+                      <p className="text-gray-700 text-sm sm:text-base mb-4">
                         {blog.content.substring(0, 100)}...
                       </p>
                       <div className="flex justify-between items-center mt-4">
@@ -159,27 +159,31 @@ const MyBlogs = () => {
                                   : "text-gray-700 hover:text-blue-600"
                               }`}
                             />
-                            <span className="ml-1">{blog.likes || 0}</span>
+                            <span className="ml-1 text-sm sm:text-base">
+                              {blog.likes || 0}
+                            </span>
                           </button>
                           <button
                             className="flex items-center"
                             onClick={() => {
-                              handleView(index)
+                              handleView(index);
                             }}
                           >
                             <FaCommentDots className="text-gray-700 hover:text-blue-600 transition-colors" />
-                            <span className="ml-1">{blog.comments || 0}</span>
+                            <span className="ml-1 text-sm sm:text-base">
+                              {blog.comments || 0}
+                            </span>
                           </button>
                         </div>
                         <div className="flex">
                           <button
-                            className="text-white bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded transition-colors mr-2"
+                            className="text-white bg-blue-600 hover:bg-blue-700 px-2 sm:px-3 py-1 rounded transition-colors mr-2"
                             onClick={() => handleUpdate(index)}
                           >
                             Edit
                           </button>
                           <button
-                            className="text-white bg-red-600 hover:bg-red-700 px-3 py-1 rounded transition-colors"
+                            className="text-white bg-red-600 hover:bg-red-700 px-2 sm:px-3 py-1 rounded transition-colors"
                             onClick={() => handleDelete(index)}
                           >
                             Delete
@@ -193,12 +197,12 @@ const MyBlogs = () => {
             </div>
           ) : (
             <div className="flex flex-col items-center justify-center min-h-screen">
-              <h2 className="text-4xl font-bold text-gray-800 mb-6">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-6">
                 No Blogs Found
               </h2>
-              <p className="text-xl text-gray-600 mb-6">
-                It looks like you haven't created any blogs yet. Start sharing your
-                thoughts and ideas!
+              <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 mb-6">
+                It looks like you haven't created any blogs yet. Start sharing
+                your thoughts and ideas!
               </p>
               <button
                 className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"

@@ -32,7 +32,7 @@ const User = () => {
         formData.append(key, form[key]);
       });
       const response = await axios.post(
-        "https://doubtful-waders-ray.cyclic.app/post",
+        `${import.meta.env.VITE_BACKEND_URI}/post`,
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },

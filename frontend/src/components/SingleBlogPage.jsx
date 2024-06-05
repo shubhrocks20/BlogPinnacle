@@ -32,16 +32,14 @@ const SingleBlogPage = () => {
   const [loading, setLoading] = useState(true); // State variable to track loading state
 
   useEffect(() => {
-    axios
-      .get(`https://doubtful-waders-ray.cyclic.app/blog/${id}`)
-      .then((res) => {
-        setBlog(res.data.post);
-        setLoading(false); // Set loading state to false when blog data is fetched
-      });
+    axios.get(`${import.meta.env.VITE_BACKEND_URI}/blog/${id}`).then((res) => {
+      setBlog(res.data.post);
+      setLoading(false); // Set loading state to false when blog data is fetched
+    });
 
     if (user) {
       axios
-        .get(`https://doubtful-waders-ray.cyclic.app/likedPost/${user._id}`)
+        .get(`${import.meta.env.VITE_BACKEND_URI}/likedPost/${user._id}`)
         .then((res) => setLikedBlogs(res.data));
     }
   }, []);
@@ -52,7 +50,7 @@ const SingleBlogPage = () => {
   const handleComment = async () => {
     try {
       const res = await axios.get(
-        `https://doubtful-waders-ray.cyclic.app/getComments/${blog._id}`
+        `${import.meta.env.VITE_BACKEND_URI}/getComments/${blog._id}`
       );
       setComments(res.data); // Set comments for the selected blog
     } catch (error) {
@@ -79,7 +77,7 @@ const SingleBlogPage = () => {
   const handleDeleteComment = async (commentId) => {
     try {
       const res = await axios.delete(
-        `https://doubtful-waders-ray.cyclic.app/uncomment/${commentId}`
+        `${import.meta.env.VITE_BACKEND_URI}/uncomment/${commentId}`
       );
       // Update the comments state after deletion
       const updatedComments = comments.filter(
@@ -87,7 +85,7 @@ const SingleBlogPage = () => {
       );
       setComments(updatedComments);
       axios
-        .get(`https://doubtful-waders-ray.cyclic.app/blog/${id}`)
+        .get(`${import.meta.env.VITE_BACKEND_URI}/blog/${id}`)
         .then((res) => {
           setBlog(res.data.post);
         });
@@ -125,7 +123,7 @@ const SingleBlogPage = () => {
       // Like the post
       try {
         const res = await axios.post(
-          `https://doubtful-waders-ray.cyclic.app/addLike`,
+          `${import.meta.env.VITE_BACKEND_URI}/addLike`,
           JSON.stringify({
             postId: blog._id,
             userId: user._id,
@@ -137,10 +135,10 @@ const SingleBlogPage = () => {
           }
         );
         axios
-          .get(`https://doubtful-waders-ray.cyclic.app/likedPost/${user._id}`)
+          .get(`${import.meta.env.VITE_BACKEND_URI}/likedPost/${user._id}`)
           .then((res) => setLikedBlogs(res.data));
         axios
-          .get(`https://doubtful-waders-ray.cyclic.app/blog/${blog._id}`)
+          .get(`${import.meta.env.VITE_BACKEND_URI}/blog/${blog._id}`)
           .then((res) => setBlog(res.data.post));
       } catch (error) {
         console.log("Error liking post:", error);
@@ -149,7 +147,7 @@ const SingleBlogPage = () => {
       // Unlike the post
       try {
         const res = await axios.post(
-          `https://doubtful-waders-ray.cyclic.app/blog/unlike`,
+          `${import.meta.env.VITE_BACKEND_URI}/blog/unlike`,
           JSON.stringify({
             postId: blog._id,
             userId: user._id,
@@ -161,10 +159,10 @@ const SingleBlogPage = () => {
           }
         );
         axios
-          .get(`https://doubtful-waders-ray.cyclic.app/likedPost/${user._id}`)
+          .get(`${import.meta.env.VITE_BACKEND_URI}/likedPost/${user._id}`)
           .then((res) => setLikedBlogs(res.data));
         axios
-          .get(`https://doubtful-waders-ray.cyclic.app/blog/${blog._id}`)
+          .get(`${import.meta.env.VITE_BACKEND_URI}/blog/${blog._id}`)
           .then((res) => setBlog(res.data.post));
       } catch (error) {
         console.log("Error unliking post:", error);
@@ -176,7 +174,7 @@ const SingleBlogPage = () => {
     try {
       // Get the current blog using the expanded blog index
       const res = await axios.post(
-        `https://doubtful-waders-ray.cyclic.app/addComment`,
+        `${import.meta.env.VITE_BACKEND_URI}/addComment`,
         JSON.stringify({
           postId: blog._id,
           userId: user._id,
@@ -192,7 +190,7 @@ const SingleBlogPage = () => {
       setShowComments(true);
 
       axios
-        .get(`https://doubtful-waders-ray.cyclic.app/${blog._id}`)
+        .get(`${import.meta.env.VITE_BACKEND_URI}/${blog._id}`)
         .then((res) => setBlog(res.data.post));
     } catch (error) {
       console.log("Error adding comment:", error);

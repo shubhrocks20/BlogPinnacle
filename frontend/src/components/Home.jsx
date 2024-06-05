@@ -17,7 +17,7 @@ const Home = () => {
 
   useEffect(() => {
     axios
-      .get("https://doubtful-waders-ray.cyclic.app/latest/blogs")
+      .get(`${import.meta.env.VITE_BACKEND_URI}/latest/blogs`)
       .then((res) => res.data)
       .then((res) => {
         setBlogs(res);
@@ -87,8 +87,8 @@ const Home = () => {
                 <h2 className="text-xl sm:text-2xl font-bold mb-4">
                   {blog.title}
                 </h2>
-                <p className="text-gray-800 text-base sm:text-lg md:text-xl lg:px-24 mb-4">
-                  {blog.content.substr(0, 100)}
+                <p className="text-gray-800 text-base sm:text-sm md:text-md md:text-lg mb-4 h-20">
+                  {blog.content.substr(0, 100) + "...."}
                 </p>
                 <button
                   className="inline-flex items-center font-medium hover:underline"

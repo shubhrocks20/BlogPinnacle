@@ -27,7 +27,7 @@ const Register = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "https://doubtful-waders-ray.cyclic.app/register",
+        `${import.meta.env.VITE_BACKEND_URI}/register`,
         JSON.stringify(form),
         {
           headers: {

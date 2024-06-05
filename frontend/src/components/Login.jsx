@@ -27,7 +27,7 @@ const Login = () => {
     try {
       console.log(form);
       const response = await axios.post(
-        "https://doubtful-waders-ray.cyclic.app/login",
+        `${import.meta.env.VITE_BACKEND_URI}/login`,
         JSON.stringify(form),
         {
           headers: {
@@ -81,18 +81,20 @@ const Login = () => {
           <img
             src="/images/login.png"
             alt="Person using laptop"
-            className="object-cover w-full md:h-auto"
+            className="object-cover w-full  md:h-auto"
           />
         </div>
         <div className="p-8 md:w-1/2">
           <form class="form" onSubmit={handleLogin}>
-            <h2 class="text-4xl mb-16 font-bold text-center">Sign In</h2>
+            <h2 class="text-2xl md:text-4xl  mb-16 font-bold text-center">
+              Sign In
+            </h2>
             <div class="flex items-center mb-4">
               <label class="form-label" for="name">
                 <img src="./images/email.png" alt="" class="w-4 me-2" />
               </label>
               <input
-                class="form-input outline-none text-lg w-full  py-2 px-6 rounded-lg"
+                class="form-input  outline-none text-md md:text-lg w-full  py-2 px-6 rounded-lg"
                 type="email"
                 id="email"
                 name="email"
@@ -107,7 +109,7 @@ const Login = () => {
                 <img src="./images/padlock.png" alt="" class="w-4 me-2" />
               </label>
               <input
-                class="form-input outline-none w-full  py-2 px-6 rounded-lg"
+                class="form-input text-md md:text-lg outline-none w-full  py-2 px-6 rounded-lg"
                 type="password"
                 name="password"
                 placeholder="Password"
@@ -116,14 +118,9 @@ const Login = () => {
               />
             </div>
             <hr class="border-b-1 border-black mb-7" />
-            <div class="flex items-center mb-4 space-x-3">
-              <input class="form-checkbox" type="checkbox" id="remember" />
-              <label class="form-check-label" for="remember">
-                Remember me
-              </label>
-            </div>
+
             <button
-              class="bg-blue-500 px-5 py-2 rounded-md text-white mt-6"
+              class="bg-blue-500 md:px-6  px-4 py-2 rounded-md text-white mt-4 md:mt-6"
               type="submit"
             >
               Log In

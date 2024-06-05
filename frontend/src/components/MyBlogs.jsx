@@ -14,7 +14,7 @@ const MyBlogs = () => {
 
   useEffect(() => {
     axios
-      .get(`https://doubtful-waders-ray.cyclic.app/blogs/${user._id}`)
+      .get(`${import.meta.env.VITE_BACKEND_URI}/blogs/${user._id}`)
       .then((res) => {
         setBlogs(res.data);
         setLoading(false); // Set loading state to false when blogs data is fetched
@@ -24,14 +24,14 @@ const MyBlogs = () => {
       });
 
     axios
-      .get(`https://doubtful-waders-ray.cyclic.app/likedPost/${user._id}`)
+      .get(`${import.meta.env.VITE_BACKEND_URI}/likedPost/${user._id}`)
       .then((res) => setLikedBlogs(res.data));
   }, []);
 
   const handleDelete = async (index) => {
     try {
       const res = await axios.delete(
-        `https://doubtful-waders-ray.cyclic.app/delete/blog/${blogs[index]._id}`
+        `${import.meta.env.VITE_BACKEND_URI}/delete/blog/${blogs[index]._id}`
       );
       setBlogs((prevBlogs) =>
         prevBlogs.filter((blog) => blog._id !== res.data.deletedPost._id)
@@ -60,7 +60,7 @@ const MyBlogs = () => {
       // Like the post
       try {
         const res = await axios.post(
-          `https://doubtful-waders-ray.cyclic.app/addLike`,
+          `${import.meta.env.VITE_BACKEND_URI}/addLike`,
           JSON.stringify({
             postId: blog._id,
             userId: user._id,
@@ -72,10 +72,10 @@ const MyBlogs = () => {
           }
         );
         axios
-          .get(`https://doubtful-waders-ray.cyclic.app/likedPost/${user._id}`)
+          .get(`${import.meta.env.VITE_BACKEND_URI}/likedPost/${user._id}`)
           .then((res) => setLikedBlogs(res.data));
         axios
-          .get(`https://doubtful-waders-ray.cyclic.app/blogs/${user._id}`)
+          .get(`${import.meta.env.VITE_BACKEND_URI}/blogs/${user._id}`)
           .then((res) => setBlogs(res.data));
       } catch (error) {
         console.log("Error liking post:", error);
@@ -84,7 +84,7 @@ const MyBlogs = () => {
       // Unlike the post
       try {
         const res = await axios.post(
-          `https://doubtful-waders-ray.cyclic.app/blog/unlike`,
+          `${import.meta.env.VITE_BACKEND_URI}/blog/unlike`,
           JSON.stringify({
             postId: blog._id,
             userId: user._id,
@@ -96,10 +96,10 @@ const MyBlogs = () => {
           }
         );
         axios
-          .get(`https://doubtful-waders-ray.cyclic.app/likedPost/${user._id}`)
+          .get(`${import.meta.env.VITE_BACKEND_URI}/likedPost/${user._id}`)
           .then((res) => setLikedBlogs(res.data));
         axios
-          .get(`https://doubtful-waders-ray.cyclic.app/blogs/${user._id}`)
+          .get(`${import.meta.env.VITE_BACKEND_URI}/blogs/${user._id}`)
           .then((res) => setBlogs(res.data));
       } catch (error) {
         console.log("Error unliking post:", error);
